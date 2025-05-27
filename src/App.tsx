@@ -251,6 +251,11 @@ function App() {
                   ))}
                 </Slider>
                 
+                {/* Friendly emoji message */}
+                <div className="emoji-message">
+                  Thanks for viewing these repositories! 😊 😄 🎉 👍 ✨ 🚀 💯
+                </div>
+                
                 {/* Alphabet range tracker */}
                 {repos.length > 0 && (
                   <div className="alphabet-tracker">
