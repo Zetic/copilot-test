@@ -145,18 +145,73 @@ header {
   margin: 0 0.5rem;
 }
 
-/* Slick Carousel Custom Styling */
-.slick-dots {
-  bottom: -35px;
+/* Custom Carousel Slider Bar (replacing dots) */
+.slider-container {
+  position: relative;
+  margin: 1.5rem auto;
+  height: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 600px;
 }
 
-.slick-dots li button:before {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.5);
+.slider-bar {
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  position: relative;
+  transition: width 0.3s ease;
+  min-width: 100px;
+  max-width: 100%;
 }
 
-.slick-dots li.slick-active button:before {
-  color: #646cff;
+.slider-handle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background-color: #646cff;
+  border-radius: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: left 0.2s ease;
+}
+
+.slider-handle:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 0 0 8px rgba(100, 108, 255, 0.6);
+}
+
+/* Alphabet Tracker */
+.alphabet-tracker {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.alphabet-range {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.alphabet-range:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+}
+
+.alphabet-range.active {
+  background-color: #646cff;
+  color: white;
+  font-weight: bold;
 }
 
 .slick-prev, .slick-next {
@@ -181,6 +236,34 @@ header {
 @media (max-width: 768px) {
   .carousel-container {
     width: 100%;
+.placeholder-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.3;
+  color: rgba(255, 255, 255, 0.5);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+/* Modify carousel styling for consistency */
+.repository-slider .slick-track {
+  display: flex;
+  align-items: stretch;
+  min-height: 220px;
+}
+
+.repository-slider .slick-slide {
+  height: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.repository-slider .slick-slide > div {
+  width: 100%;
+  height: 100%;
+}
   }
   
   .slick-prev {
