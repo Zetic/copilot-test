@@ -56,8 +56,15 @@ function App() {
   return (
     <div className="container">
       <header>
-        <h1>Your Name</h1>
-        <p>Welcome to my portfolio! Here are my public GitHub repositories:</p>
+        <h1>GitHub</h1>
+        <a 
+          href={`https://github.com/${githubUsername}`} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="github-banner"
+        >
+          github.com/{githubUsername}
+        </a>
       </header>
       <section>
         <h2>Repositories</h2>
