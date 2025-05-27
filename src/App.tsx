@@ -17,6 +17,7 @@ interface Repository {
 
 function App() {
   const [repos, setRepos] = useState<Repository[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const [showHome, setShowHome] = useState<boolean>(true);
   const [inputUsername, setInputUsername] = useState<string>('');
   const [githubUsername, setGithubUsername] = useState<string>('');
@@ -42,38 +43,53 @@ function App() {
     // Only fetch when not on home screen and username is available
     if (!showHome && githubUsername) {
       // Fetch public repositories from GitHub API
+      setLoading(true);
       fetch(`https://api.github.com/users/${githubUsername}/repos`)
         .then((res) => res.json())
-        .then((data) => setRepos(data));
+        .then((data) => {
+          setRepos(data);
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error('Error fetching repositories:', error);
+          setLoading(false);
+        });
     }
   }, [showHome, githubUsername]);
 
-  // Carousel settings
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: '10px',
-    autoplay: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
+  // Determine display mode based on repository count
+  const getSliderSettings = (repoCount: number) => {
+    // For 1-3 repositories, adjust settings to avoid carousel display issues
+    const slidesToShow = repoCount < 3 ? repoCount : 3;
+    const useCarousel = repoCount > 3;
+    
+    return {
+      dots: useCarousel,
+      infinite: useCarousel,
+      speed: 500,
+      slidesToShow: slidesToShow,
+      slidesToScroll: 1,
+      centerMode: useCarousel,
+      centerPadding: '10px',
+      autoplay: false,
+      arrows: useCarousel,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: Math.min(2, repoCount),
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }
         }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      }
-    ]
+      ]
+    };
   };
 
   return (
@@ -113,26 +129,47 @@ function App() {
           </header>
           <section>
             <h2>Repositories</h2>
-            {repos.length === 0 ? (
+            {loading ? (
               <div className="loading">Loading repositories...</div>
+            ) : repos.length === 0 ? (
+              <div className="no-repos">No public repositories available</div>
             ) : (
-              <div className="carousel-container">
-                <Slider {...sliderSettings}>
-                  {repos.map((repo) => (
-                    <div key={repo.id} className="repo-card">
-                      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="repo-link">
-                        <h3>{repo.name}</h3>
-                        <div className="repo-description">
-                          {repo.description || "No description available"}
-                        </div>
-                        <div className="repo-stats">
-                          <span>⭐ {repo.stargazers_count}</span>
-                          <span>🍴 {repo.forks_count}</span>
-                        </div>
-                      </a>
-                    </div>
-                  ))}
-                </Slider>
+              <div className={`carousel-container ${repos.length <= 3 ? 'few-repos' : ''}`}>
+                {repos.length <= 3 ? (
+                  <div className="static-repos-container">
+                    {repos.map((repo) => (
+                      <div key={repo.id} className="repo-card">
+                        <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="repo-link">
+                          <h3>{repo.name}</h3>
+                          <div className="repo-description">
+                            {repo.description || "No description available"}
+                          </div>
+                          <div className="repo-stats">
+                            <span>⭐ {repo.stargazers_count}</span>
+                            <span>🍴 {repo.forks_count}</span>
+                          </div>
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <Slider {...getSliderSettings(repos.length)}>
+                    {repos.map((repo) => (
+                      <div key={repo.id} className="repo-card">
+                        <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="repo-link">
+                          <h3>{repo.name}</h3>
+                          <div className="repo-description">
+                            {repo.description || "No description available"}
+                          </div>
+                          <div className="repo-stats">
+                            <span>⭐ {repo.stargazers_count}</span>
+                            <span>🍴 {repo.forks_count}</span>
+                          </div>
+                        </a>
+                      </div>
+                    ))}
+                  </Slider>
+                )}
               </div>
             )}
           </section>
