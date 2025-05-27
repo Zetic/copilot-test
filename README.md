@@ -4,8 +4,8 @@ This is a GitHub repository viewer built with Vite, React, and TypeScript. The a
 
 ## Features
 
+- Home screen for entering any GitHub username or profile URL
 - Displays public GitHub repositories using the GitHub API
-- Easy customization to view any GitHub user's repositories
 - Modern, responsive carousel display for repositories
 - Direct link to user's GitHub profile
 
@@ -26,10 +26,15 @@ This is a GitHub repository viewer built with Vite, React, and TypeScript. The a
 3. **Open your browser:**
    Visit [http://localhost:5173/](http://localhost:5173/) to view the GitHub repository viewer.
 
-## Customization
+## Usage
 
-- Update the GitHub username in `src/App.tsx` (look for the `githubUsername` variable) to view any user's repositories.
-- Style the site in `src/App.css` or add your own CSS.
+1. On the home screen, enter either:
+   - A GitHub username (e.g., octocat)
+   - Or a full GitHub profile URL (e.g., https://github.com/octocat)
+   
+2. Press Enter or click "View Profile" to see the user's repositories.
+
+3. Refreshing the page will return to the home screen for viewing a different profile.
 
 ## Deployment
 
