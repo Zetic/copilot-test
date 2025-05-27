@@ -214,6 +214,26 @@ header {
   font-weight: bold;
 }
 
+/* Emoji message styling */
+.emoji-message {
+  padding: 1rem;
+  margin: 1.5rem auto;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  background-color: rgba(44, 151, 75, 0.2);
+  max-width: 90%;
+  font-weight: bold;
+  animation: emoji-pulse 2s infinite;
+}
+
+@keyframes emoji-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
 .slick-prev, .slick-next {
   z-index: 1;
   width: 40px;
