@@ -5,6 +5,146 @@
   text-align: center;
 }
 
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  margin-bottom: 2rem;
+}
+
+/* Repository Card Styling */
+.carousel-container {
+  padding: 2rem 0;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.repo-card {
+  padding: 1.5rem;
+  margin: 0 0.5rem;
+  height: 220px;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.repo-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.repo-link {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.repo-card h3 {
+  color: #646cff;
+  margin-top: 0;
+  font-size: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repo-description {
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.repo-stats {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.9rem;
+}
+
+.repo-stats span {
+  margin: 0 0.5rem;
+}
+
+/* Slick Carousel Custom Styling */
+.slick-dots {
+  bottom: -35px;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.slick-dots li.slick-active button:before {
+  color: #646cff;
+}
+
+.slick-prev, .slick-next {
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+}
+
+.slick-prev {
+  left: -25px;
+}
+
+.slick-next {
+  right: -25px;
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 24px;
+  color: #646cff;
+}
+
+@media (max-width: 768px) {
+  .carousel-container {
+    width: 100%;
+  }
+  
+  .slick-prev {
+    left: -15px;
+  }
+  
+  .slick-next {
+    right: -15px;
+  }
+}
+
+/* Animation for carousel transition */
+.slick-slide {
+  transition: all 0.5s ease;
+  opacity: 0.7;
+  transform: scale(0.9);
+}
+
+.slick-current {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slick-active {
+  opacity: 0.9;
+}
+
+.loading {
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+/* Keep original styles for compatibility */
 .logo {
   height: 6em;
   padding: 1.5em;
